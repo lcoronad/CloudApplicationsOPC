@@ -8,13 +8,11 @@ This project have four directories
 * project-service: Provides information about projects
 * ocp: Commands for create projects and applications in OpenShift 3.11, and templates for databases MongoDB and PostgreSQL in format YAML
 
-The microservices is deployed in Red Hat Opentlc over OpenShift 3.11 Shared access.
+The microservices is deployed in Red Hat Opentlc over OpenShift 3.11 Shared access this environment is active until 04/07/2019.
 
 ## URL Git hub
 
-This is the URL of Git for the source code.
-
-https://github.com/lcoronad/CloudApplicationsOPC
+* [URL Freelancer4J](https://github.com/lcoronad/CloudApplicationsOPC) - URL of Git for the source code.
 
 ## Freelancers Service
 
@@ -175,4 +173,8 @@ curl for health check
 ```
 curl http://api-gateway-service-lcoronad-redhat-freelancer.apps.na311.openshift.opentlc.com/health
 ```
+
+## Author
+
+* **Lázaro Miguel Coronado Torres** - *Middleware Senior Consultant - lcoronad@redhat.com* 
 
