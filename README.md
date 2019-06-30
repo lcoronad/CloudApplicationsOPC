@@ -8,6 +8,8 @@ This project have four directories
 * project-service: Provides information about projects
 * ocp: Commands for create projects and applications in OpenShift 3.11, and templates for databases MongoDB and PostgreSQL in format YAML
 
+The microservices is deployed in Red Hat Opentlc over OpenShift 3.11 Shared access.
+
 ## URL Git hub
 
 This is the URL of Git for the source code.

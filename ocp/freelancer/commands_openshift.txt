@@ -6,7 +6,7 @@ oc login --insecure-skip-tls-verify --server=${OCP_SERVER_URL}
 oc new-project $FREELANCER_PRJ
 oc project $FREELANCER_PRJ
 
-#Microservice de Freelancers - SpringBoot
+# Freelancer Microservice - SpringBoot
 
 oc process -f ocp/freelancer/freelancer-service-postgresql-persistent.yaml \
 -p FREELANCER_DB_USERNAME=jboss \
@@ -22,7 +22,7 @@ oc policy add-role-to-user view -z default -n $FREELANCER_PRJ
 mvn clean fabric8:deploy -Popenshift -Dfabric8.namespace=$FREELANCER_PRJ -DskipTests
 
 
-#Microservice de Projects - Vert.x
+# Project Microservice - Vert.x
 
 cd ..
 
@@ -39,7 +39,7 @@ oc policy add-role-to-user view -z default -n $FREELANCER_PRJ
 mvn clean fabric8:deploy -Popenshift -Dfabric8.namespace=$FREELANCER_PRJ -DskipTests
 
 
---Gateway
+# Gateway Microservice - Thorntail
 
 cd ../api-gateway-service
 
