@@ -2,11 +2,11 @@ export OCP_SERVER_URL=https://master.na311.openshift.opentlc.com:443
 export OCP_USER_ID=lcoronad-redhat
 export FREELANCER_PRJ=${OCP_USER_ID}-freelancer
 
-oc login --insecure-skip-tls-verify --server=${OCP_SERVER_URL} --username=lcoronad-redhat.com --password=SftYup10!
+oc login --insecure-skip-tls-verify --server=${OCP_SERVER_URL}
 oc new-project $FREELANCER_PRJ
 oc project $FREELANCER_PRJ
 
-#Microservicio de Freelancers - SpringBoot
+#Microservice de Freelancers - SpringBoot
 
 oc process -f ocp/freelancer/freelancer-service-postgresql-persistent.yaml \
 -p FREELANCER_DB_USERNAME=jboss \
@@ -22,7 +22,7 @@ oc policy add-role-to-user view -z default -n $FREELANCER_PRJ
 mvn clean fabric8:deploy -Popenshift -Dfabric8.namespace=$FREELANCER_PRJ -DskipTests
 
 
-#Microservicio de Projects - Vert.x
+#Microservice de Projects - Vert.x
 
 cd ..
 
@@ -40,6 +40,8 @@ mvn clean fabric8:deploy -Popenshift -Dfabric8.namespace=$FREELANCER_PRJ -DskipT
 
 
 --Gateway
+
+cd ../api-gateway-service
 
 oc create configmap api-gateway-service --from-file=etc/project-defaults.yml -n $FREELANCER_PRJ
 
