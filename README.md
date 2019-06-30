@@ -1,13 +1,12 @@
 # CloudApplicationsOPC
-Projects course Advanced Cloud Applications OPC for business case Freelancers4J inc.
+Projects for assignment of course Advanced Cloud Applications OCP for business case Freelancers4J inc.
 
 This project have four directories
 
 * api-gateway-service: Entry point for front-end clients
 * freelancer-service: Provides information about freelancers
 * project-service: Provides information about projects
-* ocp: Commands for create project and applications in OpenShift 3.11, and templates for databases MongoDB and PostgreSQL in format YAML
-
+* ocp: Commands for create projects and applications in OpenShift 3.11, and templates for databases MongoDB and PostgreSQL in format YAML
 
 ## URL Git hub
 
@@ -20,8 +19,8 @@ https://github.com/lcoronad/CloudApplicationsOPC
 The Freelancer service provides information about freelancers and have three enpoints, is developed in SpringBoot whit the next tiers.
 
 1. SpringBoot root Application: Class main of SpringBoot
-2. Model: Objects that represents the entities of business (Model of Freelance), and interface of Spring Repository
-3. Rest: Classes that expose the service endpoints and call the business logic, and health check endpoint
+2. Model: Objects that represents the business entities (Model of Freelance), and interface of Spring Repository
+3. Rest: Classes that expose the service endpoints and call the business logic and health check endpoint
 4. Service: Classes that implements the business logic and connect to database PostgreSQL using JPA and Srping Repository.
 
 This service use PostgreSQL like repository and the data for connection is in a ConfigMap. The health check and route that use OpenShift is configured in YAML into fabric8 directory.
@@ -64,7 +63,7 @@ The Project service provides information about the projects and have five endpoi
 
 1. MainVerticle: Main verticle that deploy others verticles and retreive the enviroment variables.
 2. ApiVerticle: Verticle that expose the five endpoints three business endpoint and two of health check, too create the server to listen requests.
-3. Model: Objects that represents the entities of business (Model of Project)
+3. Model: Objects that represents the business entities (Model of Project)
 4. Service: Classes that implements the business logic and connect to database MongoDB using MongoClient of Vert.x.
 
 This service use Mongo like repository and the data for connection is in a ConfigMap. The health check and route that use OpenShift is configured in YAML into fabric8 directory.
@@ -116,7 +115,7 @@ The API gateway is the entry point for front-end clients into the freelance4j ap
 
 1. Application: Root application for Thorntail.
 2. Rest: Classes that expose the service endpoints and call the business logic, and health check endpoint.
-3. Model: Objects that represents the entities of business (Model of Freelancer and Project)
+3. Model: Objects that represents the business entities (Model of Freelancer and Project)
 4. Service: Classes that consume the backends services (Project and Freelancer) using Resteasy.
 
 This service use a ConfigMap for the URL of the backend services. The health check, volumens, config map, java options and route that use OpenShift is configured in YAML into fabric8 directory.
