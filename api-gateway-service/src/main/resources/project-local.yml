@@ -1,0 +1,13 @@
+swarm:
+  datasources:
+    data-sources:
+      InventoryDS:
+        driver-name: postgresql
+        connection-url: jdbc:postgresql://inventory-postgresql:5432/inventorydb
+        user-name: jboss
+        password: jboss
+  http:
+    port: 18080
+project:
+  service:
+    url: http://project-service-lcoronad-redhat-freelancer.apps.na311.openshift.opentlc.com
