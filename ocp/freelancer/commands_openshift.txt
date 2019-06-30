@@ -1,0 +1,47 @@
+export OCP_SERVER_URL=https://master.na311.openshift.opentlc.com:443
+export OCP_USER_ID=lcoronad-redhat
+export FREELANCER_PRJ=${OCP_USER_ID}-freelancer
+
+oc login --insecure-skip-tls-verify --server=${OCP_SERVER_URL} --username=lcoronad-redhat.com --password=SftYup10!
+oc new-project $FREELANCER_PRJ
+oc project $FREELANCER_PRJ
+
+#Microservicio de Freelancers - SpringBoot
+
+oc process -f ocp/freelancer/freelancer-service-postgresql-persistent.yaml \
+-p FREELANCER_DB_USERNAME=jboss \
+-p FREELANCER_DB_PASSWORD=jboss \
+-p FREELANCER_DB_NAME=freelancerdb | oc create -f - -n $FREELANCER_PRJ
+
+cd freelancer-service
+
+oc create configmap freelancer-service --from-file=etc/app-config.yml -n $FREELANCER_PRJ
+
+oc policy add-role-to-user view -z default -n $FREELANCER_PRJ
+
+mvn clean fabric8:deploy -Popenshift -Dfabric8.namespace=$FREELANCER_PRJ -DskipTests
+
+
+#Microservicio de Projects - Vert.x
+
+cd ..
+
+oc process -f ocp/freelancer/freelancer-project-mongodb-persistent.yaml \
+-p PROJECT_DB_USERNAME=mongo \
+-p PROJECT_DB_PASSWORD=mongo | oc create -f - -n $FREELANCER_PRJ
+
+cd project-service
+
+oc create configmap project-service --from-file=etc/app-config.yml -n $FREELANCER_PRJ
+
+oc policy add-role-to-user view -z default -n $FREELANCER_PRJ
+
+mvn clean fabric8:deploy -Popenshift -Dfabric8.namespace=$FREELANCER_PRJ -DskipTests
+
+
+--Gateway
+
+oc create configmap api-gateway-service --from-file=etc/project-defaults.yml -n $FREELANCER_PRJ
+
+mvn clean fabric8:deploy -Popenshift -Dfabric8.namespace=$FREELANCER_PRJ -DskipTests
+
